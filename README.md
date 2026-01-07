@@ -8,7 +8,7 @@ A specialized utility container designed for automated backups. It combines the 
 - **Cron:** For scheduling periodic tasks.
 
 ## 🐳 Docker Hub
-The image is published to: **[yakrel93/backrest-rclone](https://hub.docker.com/r/yakrel93/backrest-rclone)**
+The image is published to: **[ghcr.io/yakrel/docker-backrest-rclone](https://github.com/Yakrel/docker-backrest-rclone/pkgs/container/docker-backrest-rclone)**
 
 ## 🔄 Build Policy
 - **Schedule:** Builds run twice a week (Sunday & Wednesday at 02:00 UTC).
