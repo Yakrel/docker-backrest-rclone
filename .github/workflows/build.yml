@@ -56,11 +56,25 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:latest
           cache-to: type=inline
+          provenance: false
 
       - name: Clean up old package versions
         uses: actions/delete-package-versions@v5
         with: 
           package-name: 'docker-backrest-rclone'
           package-type: 'container'
-          min-versions-to-keep: 5
-          delete-only-untagged-versions: 'true'
+          min-versions-to-keep: 2
+          delete-only-untagged-versions: 'false'
+
+  workflow-keepalive:
+    # GitHub disables scheduled workflows after 60 days without repository activity.
+    # This re-enables the workflow through the API on every scheduled run (no dummy commits).
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Re-enable this workflow (resets the inactivity timer)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/build.yml/enable"

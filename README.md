@@ -11,5 +11,5 @@ A specialized utility container designed for automated backups. It combines the 
 The image is published to: **[ghcr.io/yakrel/docker-backrest-rclone](https://github.com/Yakrel/docker-backrest-rclone/pkgs/container/docker-backrest-rclone)**
 
 ## 🔄 Build Policy
-- **Schedule:** Builds run twice a week (Sunday & Wednesday at 02:00 UTC).
-- **Retention:** Retains `latest` and the last **5** dated tags.
+- **Schedule:** Builds run weekly (Sunday at 02:00 UTC), on pushes to `main`, and on manual dispatch. A keepalive job re-enables the scheduled workflow on each scheduled run so GitHub does not disable it after 60 days of repository inactivity.
+- **Retention:** Keeps the 2 most recent image versions (each carries `latest`/dated tags as applicable); older tagged and untagged versions are deleted after every build.
